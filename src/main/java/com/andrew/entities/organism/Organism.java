@@ -1,4 +1,7 @@
 package com.andrew.entities.organism;
 
-public abstract class Organism {
+public class Organism implements Reproducible {
+    public void reproduce() {
+        
+    }
 }
