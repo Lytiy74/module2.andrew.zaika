@@ -7,25 +7,51 @@ import com.andrew.entities.organism.Reproducible;
 
 public abstract class Animal extends Organism implements Reproducible, Movable, Eatable {
     private int weight;
+    private int maxQuantity;
     private int saturation;
     private int maxSpeed;
 
-    public Animal(int weight, int saturation, int maxSpeed) {
-        this.weight = weight;
-        this.saturation = saturation;
-        this.maxSpeed = maxSpeed;
-    }
-
-    @Override
     public void move() {
 
     }
-    @Override
     public void eat() {
 
     }
 
-    @Override
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public void setMaxQuantity(int maxQuantity) {
+        this.maxQuantity = maxQuantity;
+    }
+
+    public void setSaturation(int saturation) {
+        this.saturation = saturation;
+    }
+
+    public void setMaxSpeed(int maxSpeed) {
+        this.maxSpeed = maxSpeed;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public int getMaxQuantity() {
+        return maxQuantity;
+    }
+
+    public int getSaturation() {
+        return saturation;
+    }
+
+    public int getMaxSpeed() {
+        return maxSpeed;
+    }
+
+    protected abstract String getPropertiesKey();
+
     public String toString() {
         return "Animal{" +
                 "weight=" + weight +

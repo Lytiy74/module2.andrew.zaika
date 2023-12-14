@@ -1,20 +1,23 @@
 package com.andrew.map;
 
+import com.andrew.ConfigLoader;
+
 public class GameField {
-    private GameField instance;
+    private final String PROPERTIES_KEY = "map.gamefield.";
+    private static GameField instance;
     private int width;
     private int height;
     private Cell[][] cells;
 
-    private GameField(int width, int height,Cell[][] cells) {
-        this.width = width;
-        this.height = height;
-        this.cells = cells;
+    private GameField() {
+        this.width = ConfigLoader.getIntProperty(PROPERTIES_KEY + "width");
+        this.height = ConfigLoader.getIntProperty(PROPERTIES_KEY + "height");
+        this.cells = new Cell[height][width];
     }
 
-    public GameField getInstance(int width,int height, Cell[][] cells){
+    public static GameField getInstance(){
         if (instance == null){
-            instance = new GameField(width, height, cells);
+            instance = new GameField();
         }
         return instance;
     }
