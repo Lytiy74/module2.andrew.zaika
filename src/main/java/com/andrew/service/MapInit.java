@@ -37,13 +37,15 @@ public class MapInit {
         for (int row = 0; row < cells.length; row++) {
             for (int column = 0; column < cells[row].length; column++) {
                 cells[row][column] = new Cell();
+                logger.log("Cell ROW[" + row + "] COL[" + column + "] was initialized. | "
+                        + cells[row][column].toString());
             }
         }
     }
     private void fillCells(Cell[][] cells){
         for (int row = 0; row < cells.length; row++) {
             for (int column = 0; column < cells[row].length; column++) {
-                addRandomEntityToCell(cells[column][row]);
+                addRandomEntityToCell(cells[row][column]);
             }
         }
     }
@@ -51,7 +53,12 @@ public class MapInit {
         Class<?> randomEntityClass = getRandomEntity();
         try {
             Constructor<?> constructor = randomEntityClass.getConstructor();
-            cell.addEntities((Organism) constructor.newInstance());
+            Organism entity = (Organism) constructor.newInstance();
+            int maxQuantity = entity.getMaxQuantity();
+            int quantityToAdd = new Random().nextInt(maxQuantity);
+            for (int i = 0; i < quantityToAdd; i++) {
+                cell.addEntities(entity);
+            }
         } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             e.printStackTrace();
         }

@@ -7,7 +7,6 @@ import com.andrew.entities.organism.Reproducible;
 
 public abstract class Animal extends Organism implements Reproducible, Movable, Eatable {
     private int weight;
-    private int maxQuantity;
     private int saturation;
     private int maxSpeed;
 
@@ -22,9 +21,7 @@ public abstract class Animal extends Organism implements Reproducible, Movable, 
         this.weight = weight;
     }
 
-    public void setMaxQuantity(int maxQuantity) {
-        this.maxQuantity = maxQuantity;
-    }
+
 
     public void setSaturation(int saturation) {
         this.saturation = saturation;
@@ -38,9 +35,6 @@ public abstract class Animal extends Organism implements Reproducible, Movable, 
         return weight;
     }
 
-    public int getMaxQuantity() {
-        return maxQuantity;
-    }
 
     public int getSaturation() {
         return saturation;

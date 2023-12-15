@@ -17,7 +17,7 @@ public class Cell {
     }
 
     public Cell() {
-        this.maxEntetiesQuantity = ConfigLoader.getIntProperty(PROPERTIES_KEY + "max-enteties-quantity");
+        this.maxEntetiesQuantity = ConfigLoader.getIntProperty(PROPERTIES_KEY + "max-entities-quantity");
     }
 
     public int getMaxEntetiesQuantity() {
@@ -47,7 +47,7 @@ public class Cell {
     @Override
     public String toString() {
         return "Cell{" +
-                "entities=" + entities +
+                "entities=" + entities.toString() +
                 '}';
     }
 }
