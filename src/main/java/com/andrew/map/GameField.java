@@ -1,9 +1,11 @@
 package com.andrew.map;
 
-import com.andrew.ConfigLoader;
+import com.andrew.service.ConfigLoader;
+import com.andrew.service.Logger;
 
 public class GameField {
-    private final String PROPERTIES_KEY = "map.gamefield.";
+    private Logger logger = Logger.getInstance();
+    private static final String PROPERTIES_KEY = "map.gamefield.";
     private static GameField instance;
     private int width;
     private int height;
@@ -13,6 +15,7 @@ public class GameField {
         this.width = ConfigLoader.getIntProperty(PROPERTIES_KEY + "width");
         this.height = ConfigLoader.getIntProperty(PROPERTIES_KEY + "height");
         this.cells = new Cell[height][width];
+        logger.log("gameField loaded");
     }
 
     public static GameField getInstance(){

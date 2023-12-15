@@ -1,4 +1,4 @@
-package com.andrew;
+package com.andrew.service;
 
 import java.io.FileInputStream;
 import java.io.IOException;

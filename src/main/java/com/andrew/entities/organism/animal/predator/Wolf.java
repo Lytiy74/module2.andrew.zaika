@@ -1,7 +1,8 @@
 package com.andrew.entities.organism.animal.predator;
 
-import com.andrew.ConfigLoader;
-
+import com.andrew.entities.organism.Entity;
+import com.andrew.service.ConfigLoader;
+@Entity
 public class Wolf extends Predator {
     private static final String PROPERTIES_KEY = "entities.organism.animal.predator.wolf.";
 

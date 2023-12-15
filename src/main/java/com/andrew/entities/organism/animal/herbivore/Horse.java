@@ -1,7 +1,8 @@
 package com.andrew.entities.organism.animal.herbivore;
 
-import com.andrew.ConfigLoader;
-
+import com.andrew.entities.organism.Entity;
+import com.andrew.service.ConfigLoader;
+@Entity
 public class Horse extends Herbivore{
     private static final String PROPERTIES_KEY = "entities.organism.animal.herbivore.horse.";
     public Horse() {
