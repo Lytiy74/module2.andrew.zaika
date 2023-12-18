@@ -12,7 +12,7 @@ public class Logger {
         return instance;
     }
 
-    public void log(String text){
+    public static void log(String text){
         System.out.println("[LOG] " + text);
     }
     public void errLog(String text){

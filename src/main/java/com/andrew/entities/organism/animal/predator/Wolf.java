@@ -17,4 +17,9 @@ public class Wolf extends Predator {
     public String getPropertiesKey() {
         return this.PROPERTIES_KEY;
     }
+
+    @Override
+    public String toString() {
+        return "Wolf";
+    }
 }

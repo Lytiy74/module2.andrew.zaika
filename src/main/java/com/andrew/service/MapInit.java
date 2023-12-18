@@ -15,8 +15,10 @@ import java.util.Set;
 
 public class MapInit {
     private static MapInit instance;
-    GameField gameField = GameField.getInstance();
-    Logger logger = Logger.getInstance();
+
+    private GameField gameField = GameField.getInstance();
+    private Logger logger = Logger.getInstance();
+    private List<Class<?>> entitiesSet = new ArrayList<>(getAllEntityClasses());
 
     private MapInit() {
         logger.log("Starting map init");
@@ -29,38 +31,47 @@ public class MapInit {
         }
         return instance;
     }
+
     private void fillGameField() {
         initCells(gameField.getCells());
         fillCells(gameField.getCells());
     }
-    private void initCells(Cell[][] cells){
+
+    private void initCells(Cell[][] cells) {
         for (int row = 0; row < cells.length; row++) {
             for (int column = 0; column < cells[row].length; column++) {
-                cells[row][column] = new Cell();
-                logger.log("Cell ROW[" + row + "] COL[" + column + "] was initialized. | "
+                cells[row][column] = new Cell(row,column);
+                logger.log("Cell[" + row + "][" + column + "] was initialized. | "
                         + cells[row][column].toString());
             }
         }
     }
-    private void fillCells(Cell[][] cells){
+
+    private void fillCells(Cell[][] cells) {
         for (int row = 0; row < cells.length; row++) {
             for (int column = 0; column < cells[row].length; column++) {
                 addRandomEntityToCell(cells[row][column]);
             }
         }
     }
-    private void addRandomEntityToCell(Cell cell){
-        Class<?> randomEntityClass = getRandomEntity();
-        try {
-            Constructor<?> constructor = randomEntityClass.getConstructor();
-            Organism entity = (Organism) constructor.newInstance();
-            int maxQuantity = entity.getMaxQuantity();
-            int quantityToAdd = new Random().nextInt(maxQuantity);
-            for (int i = 0; i < quantityToAdd; i++) {
-                cell.addEntities(entity);
+
+    private void addRandomEntityToCell(Cell cell) {
+        int cellMaxQuantity = cell.getMaxEntetiesQuantity();
+        for (int i = 0; i < cellMaxQuantity; i++) {
+            Class<?> randomEntityClass = getRandomEntity();
+            try {
+                Constructor<?> constructor = randomEntityClass.getConstructor();
+                Organism entity = (Organism) constructor.newInstance();
+                entity.setCell(cell);
+                int maxQuantity = entity.getMaxQuantity() < cell.getMaxEntetiesQuantity() ? entity.getMaxQuantity() : cell.getMaxEntetiesQuantity();
+                int quantityToAdd = new Random().nextInt(maxQuantity+1);
+                for (int x = 0; x < quantityToAdd; x++) {
+                    cell.addEntities(entity);
+                }
+            } catch (InstantiationException | IllegalAccessException | NoSuchMethodException |
+                     InvocationTargetException e) {
+                e.printStackTrace();
             }
-        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-            e.printStackTrace();
         }
     }
 
@@ -72,8 +83,8 @@ public class MapInit {
         }
         return setOfClasses;
     }
-    private Class<?> getRandomEntity(){
-        List<Class<?>> entitiesSet = new ArrayList<>(getAllEntityClasses());
+
+    private Class<?> getRandomEntity() {
         Random random = new Random();
         return entitiesSet.get(random.nextInt(entitiesSet.size()));
     }

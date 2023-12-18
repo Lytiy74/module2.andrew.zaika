@@ -1,11 +1,12 @@
-package com.andrew.entities.organism.animal.herbivore;
+package com.andrew.entities.organism.animal.predator;
 
 import com.andrew.entities.organism.Entity;
 import com.andrew.service.ConfigLoader;
 @Entity
-public class Horse extends Herbivore{
-    private static final String PROPERTIES_KEY = "entities.organism.animal.herbivore.horse.";
-    public Horse() {
+public class Fox extends Predator{
+    private static final String PROPERTIES_KEY = "entities.organism.animal.predator.fox.";
+
+    public Fox() {
         super.setMaxQuantity(ConfigLoader.getIntProperty(PROPERTIES_KEY + "maxQuantity"));
         super.setMaxSpeed(ConfigLoader.getIntProperty(PROPERTIES_KEY + "maxSpeed"));
         super.setWeight(ConfigLoader.getIntProperty(PROPERTIES_KEY + "weight"));
@@ -13,12 +14,12 @@ public class Horse extends Herbivore{
     }
 
     @Override
-    protected String getPropertiesKey() {
-        return PROPERTIES_KEY;
+    public String getPropertiesKey() {
+        return this.PROPERTIES_KEY;
     }
 
     @Override
     public String toString() {
-        return "Horse";
+        return "Fox";
     }
 }
