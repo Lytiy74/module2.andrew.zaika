@@ -22,4 +22,7 @@ public class ConfigLoader {
     public static int getIntProperty(String key){
         return Integer.parseInt(CONFIG_PROPERTIES.getProperty(key));
     }
+    public static double getDoubleProperty(String key){
+        return Double.parseDouble(CONFIG_PROPERTIES.getProperty(key));
+    }
 }

@@ -68,6 +68,8 @@ public class MapInit {
                 int maxQuantity = Math.min(entity.getMaxQuantity(), cell.getMaxEntetiesQuantity());
                 int quantityToAdd = new Random().nextInt(maxQuantity + 1);
                 for (int x = 0; x < quantityToAdd; x++) {
+                    entity = entity.getClass().getDeclaredConstructor().newInstance();
+                    entity.setCell(cell);
                     cell.addEntities(entity);
                 }
             } catch (InstantiationException | IllegalAccessException | NoSuchMethodException |

@@ -8,8 +8,6 @@ import com.andrew.map.Coordinates;
 import com.andrew.map.GameField;
 import lombok.extern.log4j.Log4j2;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import static org.reflections.Reflections.log;
