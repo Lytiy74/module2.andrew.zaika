@@ -7,10 +7,10 @@ public class Wolf extends Predator {
     private static final String PROPERTIES_KEY = "entities.organism.animal.predator.wolf.";
 
     public Wolf() {
-        super.setMaxQuantity(ConfigLoader.getIntProperty(PROPERTIES_KEY + "maxQuantity"));
-        super.setMaxSpeed(ConfigLoader.getIntProperty(PROPERTIES_KEY + "maxSpeed"));
-        super.setWeight(ConfigLoader.getIntProperty(PROPERTIES_KEY + "weight"));
-        super.setSaturation(ConfigLoader.getIntProperty(PROPERTIES_KEY + "saturation"));
+        setMaxQuantity(ConfigLoader.getIntProperty(PROPERTIES_KEY + "maxQuantity"));
+        setMaxSpeed(ConfigLoader.getIntProperty(PROPERTIES_KEY + "maxSpeed"));
+        setWeight(ConfigLoader.getIntProperty(PROPERTIES_KEY + "weight"));
+        setSaturation(ConfigLoader.getIntProperty(PROPERTIES_KEY + "saturation"));
     }
 
     @Override

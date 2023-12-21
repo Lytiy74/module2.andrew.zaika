@@ -71,6 +71,17 @@ public class Cell {
             log.warn("cant add to cell" + entities.getClass().getTypeName());
         }
     }
+    public void addEntities(List<Organism> entities) {
+        for (Organism organism:entities) {
+            if (organism instanceof Animal) {
+                addAnimal((Animal) organism);
+            } else if (organism instanceof Plants) {
+                addPlant((Plants) organism);
+            } else {
+                log.warn("cant add to cell" + organism.getClass().getTypeName());
+            }
+        }
+    }
     public void addAnimal(Animal animal) {
         this.animals.add(animal);
     }

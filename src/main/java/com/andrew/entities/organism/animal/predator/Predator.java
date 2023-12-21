@@ -16,7 +16,6 @@ public abstract class Predator extends Animal {
     public void eat(){
         List<Animal> animals = getCell().getAnimals();
         Iterator<Animal> iterator = animals.iterator();
-        Random random = new Random();
         while(iterator.hasNext()) {
          Animal animal =  iterator.next();
             if (animal != this && getRandomBooleanWithProbability(ConfigLoader.getDoubleProperty(this.getPropertiesKey() + "eat." + animal.getClass().getSimpleName().toLowerCase()))) {
