@@ -2,10 +2,11 @@ package com.andrew.map;
 
 import com.andrew.entities.organism.Organism;
 import com.andrew.service.ConfigLoader;
-import com.andrew.service.Logger;
+import static org.reflections.Reflections.log;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 public class GameField {
-    private Logger logger = Logger.getInstance();
     private static final String PROPERTIES_KEY = "map.gamefield.";
     private static GameField instance;
     private int width;
@@ -16,7 +17,7 @@ public class GameField {
         this.width = ConfigLoader.getIntProperty(PROPERTIES_KEY + "width");
         this.height = ConfigLoader.getIntProperty(PROPERTIES_KEY + "height");
         this.cells = new Cell[height][width];
-        logger.log("gameField loaded");
+        log.info("gameField loaded");
     }
     public void updateCell(Coordinates oldCoordinates, Coordinates newCoordinates, Organism organism){
         Cell oldCell = getCellAt(oldCoordinates.getX(), oldCoordinates.getY());
@@ -29,7 +30,7 @@ public class GameField {
         }
 
     }
-    private Cell getCellAt(int x, int y) {
+    public Cell getCellAt(int x, int y) {
         if (isValidCoordinate(x, y)) {
             return cells[y][x];
         }

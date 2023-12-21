@@ -4,6 +4,7 @@ import com.andrew.entities.organism.Entity;
 import com.andrew.entities.organism.Organism;
 import com.andrew.map.Cell;
 import com.andrew.map.GameField;
+import lombok.extern.log4j.Log4j2;
 import org.reflections.Reflections;
 
 import java.lang.reflect.Constructor;
@@ -13,15 +14,16 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import static org.reflections.Reflections.log;
+
+@Log4j2
 public class MapInit {
     private static MapInit instance;
-
     private GameField gameField = GameField.getInstance();
-    private Logger logger = Logger.getInstance();
     private List<Class<?>> entitiesSet = new ArrayList<>(getAllEntityClasses());
 
     private MapInit() {
-        logger.log("Starting map init");
+        log.info("Starting map init");
         fillGameField();
     }
 
@@ -40,8 +42,8 @@ public class MapInit {
     private void initCells(Cell[][] cells) {
         for (int row = 0; row < cells.length; row++) {
             for (int column = 0; column < cells[row].length; column++) {
-                cells[row][column] = new Cell(row,column);
-                logger.log("Cell[" + row + "][" + column + "] was initialized. | "
+                cells[row][column] = new Cell(row, column);
+                log.info("Cell[" + row + "][" + column + "] was initialized. | "
                         + cells[row][column].toString());
             }
         }
@@ -63,8 +65,8 @@ public class MapInit {
                 Constructor<?> constructor = randomEntityClass.getConstructor();
                 Organism entity = (Organism) constructor.newInstance();
                 entity.setCell(cell);
-                int maxQuantity = entity.getMaxQuantity() < cell.getMaxEntetiesQuantity() ? entity.getMaxQuantity() : cell.getMaxEntetiesQuantity();
-                int quantityToAdd = new Random().nextInt(maxQuantity+1);
+                int maxQuantity = Math.min(entity.getMaxQuantity(), cell.getMaxEntetiesQuantity());
+                int quantityToAdd = new Random().nextInt(maxQuantity + 1);
                 for (int x = 0; x < quantityToAdd; x++) {
                     cell.addEntities(entity);
                 }
@@ -79,7 +81,7 @@ public class MapInit {
         Reflections reflections = new Reflections("com.andrew.entities.organism");
         Set<Class<?>> setOfClasses = reflections.getTypesAnnotatedWith(Entity.class);
         for (Class<?> item : setOfClasses) {
-            logger.log("LOADED ENTITY CLASS " + item.getName());
+            log.info("Loaded entity class " + item.getSimpleName());
         }
         return setOfClasses;
     }
