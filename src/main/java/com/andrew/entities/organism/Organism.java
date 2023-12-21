@@ -45,7 +45,7 @@ public class Organism implements Reproducible {
 
         List<Organism> originalEntities = new ArrayList<>();
 
-        // Збереження початкових об'єктів
+        
         for (List<? extends Organism> listOfOrganism : list) {
             originalEntities.addAll(listOfOrganism);
         }
@@ -65,7 +65,7 @@ public class Organism implements Reproducible {
             }
         }
 
-        // Додавання нових об'єктів
+        
         getCell().addEntities(newEntities);
     }
 }
